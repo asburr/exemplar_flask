@@ -6,3 +6,4 @@ dkrun_release.env/
 .*
 !.gitignore
 *.py[cod]
+*.sqlite
