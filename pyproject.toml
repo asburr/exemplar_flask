@@ -1,0 +1,32 @@
+
+[project]
+name="exemplar_flask"
+version="0.0.1"
+description=""
+readme="README.md"
+
+# main group - packages installed from pypi and never from a local path.
+dependencies = [
+    "flask (>=3.1.3,<4.0.0)"
+]
+requires-python=">=3.10"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+# dev group - packages for pytest and pyintegrationtest and installed from pypi.
+dev = ["pytest", "pylint", "ruff", "pytest-dependency (>=0.6.1,<0.7.0)", "spyder-kernels (==3.1)"]
+# inhouse_prod group - inhouse packages used by CI/CD job to install packages from pypi.
+inhouse_prod = ["setuptools"]
+# inhouse_wsdev group - inhouse packages used in development, install packages as editable from local path.
+inhouse_wsdev = ["setuptools"]
+# inhouse_wsprod group - inhouse packages used in development, install wheels from local path to test the production install.
+inhouse_wsprod = ["setuptools"]
+
+[tool.pytest.ini_options]
+markers = [
+  "e2e: end to end testing, or production testing",
+  "unit: utin testing"
+]

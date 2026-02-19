@@ -1,0 +1,8 @@
+venv/
+__pycache__/
+dist/
+dkrun_release.env/
+.*/
+.*
+!.gitignore
+*.py[cod]
