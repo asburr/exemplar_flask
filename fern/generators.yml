@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://schema.buildwithfern.dev/generators-yml.json
+api:
+  specs:
+    - openapi: ../fernclient/openapi.json
+default-group: local
+groups:
+  local:
+    generators:
+      - name: fern-typescript-sdk
+        output:
+          location: local-file-system
+          path: ../fernclient/typescript
+        version: 3.49.3
+      - name: fern-python-sdk
+        version: 4.59.2
+        output:
+          location: local-file-system
+          path: ../fernclient/python

@@ -1,4 +1,5 @@
 venv/
+opc_venv/
 __pycache__/
 dist/
 dkrun_release.env/
