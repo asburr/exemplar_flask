@@ -13,7 +13,11 @@ class Client():
       response.raise_for_status()
     except Exception:
       if "application/json" in response.headers.get("Content-Type", ""):
-        msg = response.json().get("msg", "No message provided")
+        j = response.json()
+        if isinstance(j,str):
+          msg = j
+        else:
+          msg = response.json().get("msg", "No message provided")
       else:
         msg = response.text
       raise Exception(msg)

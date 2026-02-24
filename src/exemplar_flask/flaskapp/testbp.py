@@ -1,34 +1,49 @@
 try:
   from flask_smorest import Blueprint
-  from marshmallow import Schema
+  from marshmallow import (Schema, fields)
 except ImportError:
   from flask import Blueprint
-from flask import (request, jsonify)
+from flask import (request, jsonify, g)
 from .db import get_db
+from functools import wraps
 
 def smorest_response(params:dict[str,type], code:int=200):
   if hasattr(bp, 'response'):
       return bp.response(code)
   return lambda f: f  # Do nothing if standard Flask
 
-def smorest_arguments(params:dict[str,type], code:int=200):
-  if hasattr(bp, 'arguments'):
-    schema = Schema.from_dict(params)
-    return bp.arguments(schema, location="query")
-  return lambda f: f  # Do nothing if standard Flask
+def smorest_arguments(params: dict[str, type]):
+    if hasattr(bp, 'arguments'):
+        mapping = {str: fields.Str(required=True), int: fields.Int(), 
+                   bool: fields.Bool(), float: fields.Float()}
+        marshmallow_params = {k: mapping[v] for k, v in params.items()}
+        schema = Schema.from_dict(marshmallow_params)
+        def decorator(f):
+            @wraps(f)
+            def wrapper(*args, **kwargs):
+                # Smorest puts data in 'args' if as_kwargs=False
+                return f(*args, **kwargs)           
+            return bp.arguments(schema, location="query", as_kwargs=True)(wrapper)
+        return decorator
+    else:
+      def decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+          for k in params.keys():
+            kwargs[k] = request.args.get(k)
+          return f(*args, **kwargs)
+        return wrapper
+      return decorator
 
 bp = Blueprint('db', __name__, url_prefix='/db')
+
 test_titles=["id","field1","field2"]
 test2_titles=["id","test_id","field2","field3"]
 
 @bp.route('/test/<field1>', methods=['POST'])
 @smorest_response(200)
 @smorest_arguments({"field2":str})
-def test_post(query_args,field1):
-  if query_args:
-    field2 = query_args.get('field2')
-  else:
-    field2 = request.args.get('field2')
+def test_post(field1,field2):
   db = get_db()
   try:
     db.execute("INSERT INTO test (field1, field2) VALUES (?, ?)",(field1, field2))
@@ -51,11 +66,7 @@ def test_get(field1):
 @bp.route('/test/<testid>/test2/<field2>', methods=['POST'])
 @smorest_response(200)
 @smorest_arguments({"field3":str})
-def test2_post(query_args,testid,field2):
-  if query_args:
-    field3 = query_args.get('field3')
-  else:
-    field3 = request.args.get('field3')
+def test2_post(testid,field2,field3):
   db = get_db()
   try:
     db.execute("INSERT INTO test2 (test_id, field2, field3) VALUES (?, ?, ?)",(testid, field2,field3))
