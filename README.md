@@ -45,12 +45,21 @@ Using openapitools/openapi-generator-cli to generate a Python client.
 cd projects/exempler_flask
 ./openapigen.sh
 ```
+client is output to openapi_client/.
 ## openapipython client
 Using openapi-python-client to generate a Python client.
 ```
 cd projects/exempler_flask
 ./openapipythongen.sh
 ```
+client is output to openapi_python_client/.
+## fern client
+Using fern to generate a Python client.
+```
+cd projects/exempler_flask
+./fern_gen.sh
+```
+client is output to fernclient/.
 ## Version History
 * 0.1
   * Initial release
