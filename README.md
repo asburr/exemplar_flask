@@ -1,20 +1,26 @@
-
 # Project Title
-Simple overview of use/purpose.
+Compare generation of a Python client for a flask project.
 ## Description
-An in-depth paragraph about your project and overview of use.
+Creating the client fully-manual, semi manual using code generation systems like
+flask-smorest.
 ## Getting Started
 ### Dependencies
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+* python 3.10
 ### Installing
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+Software can be cloned from https://github.com/asburr/exemplar_flask.
 ### Executing program
-* How to run the program
-* Step-by-step bullets
+Start server
 ```
-code blocks for commands
+cd projects/exempler_flask
+poetry lock
+poetry sync --with dev,inhouse_wsdev,inhouse_wsprod
+poetry run flask --app exemplar_flask.flaskapp init-db
+```
+Use the client
+```
+cd projects/exempler_flask
+./flaskclient.sh
+./flaskclient.sh test post value1 value1.2
 ```
 ## Help
 Any advise for common problems or issues.
