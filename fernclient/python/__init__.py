@@ -6,13 +6,17 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from .types import Error, PaginationMetadata
+    from .types import Error, Generated1, Generated2, Generated4, Generated5, PaginationMetadata
     from .errors import UnprocessableEntityError
     from . import db
     from .client import AsyncMineApi, MineApi
 _dynamic_imports: typing.Dict[str, str] = {
     "AsyncMineApi": ".client",
     "Error": ".types",
+    "Generated1": ".types",
+    "Generated2": ".types",
+    "Generated4": ".types",
+    "Generated5": ".types",
     "MineApi": ".client",
     "PaginationMetadata": ".types",
     "UnprocessableEntityError": ".errors",
@@ -41,4 +45,15 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["AsyncMineApi", "Error", "MineApi", "PaginationMetadata", "UnprocessableEntityError", "db"]
+__all__ = [
+    "AsyncMineApi",
+    "Error",
+    "Generated1",
+    "Generated2",
+    "Generated4",
+    "Generated5",
+    "MineApi",
+    "PaginationMetadata",
+    "UnprocessableEntityError",
+    "db",
+]

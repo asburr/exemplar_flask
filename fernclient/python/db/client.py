@@ -4,7 +4,14 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
+from ..types.generated1 import Generated1
+from ..types.generated2 import Generated2
+from ..types.generated4 import Generated4
+from ..types.generated5 import Generated5
 from .raw_client import AsyncRawDbClient, RawDbClient
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class DbClient:
@@ -22,7 +29,7 @@ class DbClient:
         """
         return self._raw_client
 
-    def get_db_test_field1(self, field1: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
+    def get_row_from_test(self, field1: str, *, request_options: typing.Optional[RequestOptions] = None) -> Generated2:
         """
         Parameters
         ----------
@@ -33,7 +40,8 @@ class DbClient:
 
         Returns
         -------
-        None
+        Generated2
+            OK
 
         Examples
         --------
@@ -42,25 +50,30 @@ class DbClient:
         client = MineApi(
             base_url="https://yourhost.com/path/to/api",
         )
-        client.db.get_db_test_field1(
+        client.db.get_row_from_test(
             field1="field1",
         )
         """
-        _response = self._raw_client.get_db_test_field1(field1, request_options=request_options)
+        _response = self._raw_client.get_row_from_test(field1, request_options=request_options)
         return _response.data
 
-    def post_db_test_field1(self, field1: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
+    def add_row_into_test(
+        self, field1: str, *, field2: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> Generated1:
         """
         Parameters
         ----------
         field1 : str
+
+        field2 : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        None
+        Generated1
+            OK
 
         Examples
         --------
@@ -69,16 +82,17 @@ class DbClient:
         client = MineApi(
             base_url="https://yourhost.com/path/to/api",
         )
-        client.db.post_db_test_field1(
+        client.db.add_row_into_test(
             field1="field1",
+            field2="field2",
         )
         """
-        _response = self._raw_client.post_db_test_field1(field1, request_options=request_options)
+        _response = self._raw_client.add_row_into_test(field1, field2=field2, request_options=request_options)
         return _response.data
 
-    def get_db_test_testid_test2field2(
+    def get_row_from_test2(
         self, testid: str, field2: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> None:
+    ) -> Generated5:
         """
         Parameters
         ----------
@@ -91,7 +105,8 @@ class DbClient:
 
         Returns
         -------
-        None
+        Generated5
+            OK
 
         Examples
         --------
@@ -100,17 +115,17 @@ class DbClient:
         client = MineApi(
             base_url="https://yourhost.com/path/to/api",
         )
-        client.db.get_db_test_testid_test2field2(
+        client.db.get_row_from_test2(
             testid="testid",
             field2="field2",
         )
         """
-        _response = self._raw_client.get_db_test_testid_test2field2(testid, field2, request_options=request_options)
+        _response = self._raw_client.get_row_from_test2(testid, field2, request_options=request_options)
         return _response.data
 
-    def post_db_test_testid_test2field2(
-        self, testid: str, field2: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> None:
+    def add_row_to_test2with_foreign_key_to_test(
+        self, testid: str, field2: str, *, field3: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> Generated4:
         """
         Parameters
         ----------
@@ -118,12 +133,15 @@ class DbClient:
 
         field2 : str
 
+        field3 : str
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        None
+        Generated4
+            OK
 
         Examples
         --------
@@ -132,12 +150,15 @@ class DbClient:
         client = MineApi(
             base_url="https://yourhost.com/path/to/api",
         )
-        client.db.post_db_test_testid_test2field2(
+        client.db.add_row_to_test2with_foreign_key_to_test(
             testid="testid",
             field2="field2",
+            field3="field3",
         )
         """
-        _response = self._raw_client.post_db_test_testid_test2field2(testid, field2, request_options=request_options)
+        _response = self._raw_client.add_row_to_test2with_foreign_key_to_test(
+            testid, field2, field3=field3, request_options=request_options
+        )
         return _response.data
 
 
@@ -156,44 +177,9 @@ class AsyncDbClient:
         """
         return self._raw_client
 
-    async def get_db_test_field1(self, field1: str, *, request_options: typing.Optional[RequestOptions] = None) -> None:
-        """
-        Parameters
-        ----------
-        field1 : str
-
-        request_options : typing.Optional[RequestOptions]
-            Request-specific configuration.
-
-        Returns
-        -------
-        None
-
-        Examples
-        --------
-        import asyncio
-
-        from mine import AsyncMineApi
-
-        client = AsyncMineApi(
-            base_url="https://yourhost.com/path/to/api",
-        )
-
-
-        async def main() -> None:
-            await client.db.get_db_test_field1(
-                field1="field1",
-            )
-
-
-        asyncio.run(main())
-        """
-        _response = await self._raw_client.get_db_test_field1(field1, request_options=request_options)
-        return _response.data
-
-    async def post_db_test_field1(
+    async def get_row_from_test(
         self, field1: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> None:
+    ) -> Generated2:
         """
         Parameters
         ----------
@@ -204,7 +190,8 @@ class AsyncDbClient:
 
         Returns
         -------
-        None
+        Generated2
+            OK
 
         Examples
         --------
@@ -218,23 +205,23 @@ class AsyncDbClient:
 
 
         async def main() -> None:
-            await client.db.post_db_test_field1(
+            await client.db.get_row_from_test(
                 field1="field1",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.post_db_test_field1(field1, request_options=request_options)
+        _response = await self._raw_client.get_row_from_test(field1, request_options=request_options)
         return _response.data
 
-    async def get_db_test_testid_test2field2(
-        self, testid: str, field2: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> None:
+    async def add_row_into_test(
+        self, field1: str, *, field2: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> Generated1:
         """
         Parameters
         ----------
-        testid : str
+        field1 : str
 
         field2 : str
 
@@ -243,7 +230,8 @@ class AsyncDbClient:
 
         Returns
         -------
-        None
+        Generated1
+            OK
 
         Examples
         --------
@@ -257,22 +245,20 @@ class AsyncDbClient:
 
 
         async def main() -> None:
-            await client.db.get_db_test_testid_test2field2(
-                testid="testid",
+            await client.db.add_row_into_test(
+                field1="field1",
                 field2="field2",
             )
 
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.get_db_test_testid_test2field2(
-            testid, field2, request_options=request_options
-        )
+        _response = await self._raw_client.add_row_into_test(field1, field2=field2, request_options=request_options)
         return _response.data
 
-    async def post_db_test_testid_test2field2(
+    async def get_row_from_test2(
         self, testid: str, field2: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> None:
+    ) -> Generated5:
         """
         Parameters
         ----------
@@ -285,7 +271,8 @@ class AsyncDbClient:
 
         Returns
         -------
-        None
+        Generated5
+            OK
 
         Examples
         --------
@@ -299,7 +286,7 @@ class AsyncDbClient:
 
 
         async def main() -> None:
-            await client.db.post_db_test_testid_test2field2(
+            await client.db.get_row_from_test2(
                 testid="testid",
                 field2="field2",
             )
@@ -307,7 +294,51 @@ class AsyncDbClient:
 
         asyncio.run(main())
         """
-        _response = await self._raw_client.post_db_test_testid_test2field2(
-            testid, field2, request_options=request_options
+        _response = await self._raw_client.get_row_from_test2(testid, field2, request_options=request_options)
+        return _response.data
+
+    async def add_row_to_test2with_foreign_key_to_test(
+        self, testid: str, field2: str, *, field3: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> Generated4:
+        """
+        Parameters
+        ----------
+        testid : str
+
+        field2 : str
+
+        field3 : str
+
+        request_options : typing.Optional[RequestOptions]
+            Request-specific configuration.
+
+        Returns
+        -------
+        Generated4
+            OK
+
+        Examples
+        --------
+        import asyncio
+
+        from mine import AsyncMineApi
+
+        client = AsyncMineApi(
+            base_url="https://yourhost.com/path/to/api",
+        )
+
+
+        async def main() -> None:
+            await client.db.add_row_to_test2with_foreign_key_to_test(
+                testid="testid",
+                field2="field2",
+                field3="field3",
+            )
+
+
+        asyncio.run(main())
+        """
+        _response = await self._raw_client.add_row_to_test2with_foreign_key_to_test(
+            testid, field2, field3=field3, request_options=request_options
         )
         return _response.data

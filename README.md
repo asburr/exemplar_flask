@@ -62,12 +62,26 @@ cd projects/exempler_flask
 ```
 client is output to openapi_python_client/.
 ## fern client
-Using fern to generate a Python client.
+Generate the fern Python client.
+client is output to fernclient/.
 ```
 cd projects/exempler_flask
 ./fern_gen.sh
 ```
-client is output to fernclient/.
+Using the client.
+```
+poetry add --group main httpx
+poetry add --group main pydantic
+cd projects/exempler_flask
+poetry run python
+#from fernclient.python.db.client import DbClient
+from fernclient.python.client import MineApi
+a = MineApi(base_url="http://127.0.0.1:5000/")
+a.db.add_row_into_test(field1="value1",field2="value1.2")
+a.db.get_row_from_test(field1="value1")
+a.db.add_row_to_test2with_foreign_key_to_test(testid="value1",field2="value2",field3="value2.1")
+a.db.get_row_from_test2(testid="value1",field2="value2")
+```
 ## Version History
 * 0.1
   * Initial release

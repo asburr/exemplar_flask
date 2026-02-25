@@ -11,15 +11,22 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.error import Error
+from ..types.generated1 import Generated1
+from ..types.generated2 import Generated2
+from ..types.generated4 import Generated4
+from ..types.generated5 import Generated5
+
+# this is used as the default value for optional parameters
+OMIT = typing.cast(typing.Any, ...)
 
 
 class RawDbClient:
     def __init__(self, *, client_wrapper: SyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    def get_db_test_field1(
+    def get_row_from_test(
         self, field1: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[None]:
+    ) -> HttpResponse[Generated2]:
         """
         Parameters
         ----------
@@ -30,7 +37,8 @@ class RawDbClient:
 
         Returns
         -------
-        HttpResponse[None]
+        HttpResponse[Generated2]
+            OK
         """
         _response = self._client_wrapper.httpx_client.request(
             f"db/test/{jsonable_encoder(field1)}",
@@ -39,35 +47,59 @@ class RawDbClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return HttpResponse(response=_response, data=None)
+                _data = typing.cast(
+                    Generated2,
+                    parse_obj_as(
+                        type_=Generated2,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def post_db_test_field1(
-        self, field1: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[None]:
+    def add_row_into_test(
+        self, field1: str, *, field2: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[Generated1]:
         """
         Parameters
         ----------
         field1 : str
+
+        field2 : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[None]
+        HttpResponse[Generated1]
+            OK
         """
         _response = self._client_wrapper.httpx_client.request(
             f"db/test/{jsonable_encoder(field1)}",
             method="POST",
+            json={
+                "field2": field2,
+            },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
-                return HttpResponse(response=_response, data=None)
+                _data = typing.cast(
+                    Generated1,
+                    parse_obj_as(
+                        type_=Generated1,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
@@ -84,9 +116,9 @@ class RawDbClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def get_db_test_testid_test2field2(
+    def get_row_from_test2(
         self, testid: str, field2: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[None]:
+    ) -> HttpResponse[Generated5]:
         """
         Parameters
         ----------
@@ -99,7 +131,8 @@ class RawDbClient:
 
         Returns
         -------
-        HttpResponse[None]
+        HttpResponse[Generated5]
+            OK
         """
         _response = self._client_wrapper.httpx_client.request(
             f"db/test/{jsonable_encoder(testid)}/test2/{jsonable_encoder(field2)}",
@@ -108,15 +141,22 @@ class RawDbClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return HttpResponse(response=_response, data=None)
+                _data = typing.cast(
+                    Generated5,
+                    parse_obj_as(
+                        type_=Generated5,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    def post_db_test_testid_test2field2(
-        self, testid: str, field2: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[None]:
+    def add_row_to_test2with_foreign_key_to_test(
+        self, testid: str, field2: str, *, field3: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> HttpResponse[Generated4]:
         """
         Parameters
         ----------
@@ -124,21 +164,38 @@ class RawDbClient:
 
         field2 : str
 
+        field3 : str
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        HttpResponse[None]
+        HttpResponse[Generated4]
+            OK
         """
         _response = self._client_wrapper.httpx_client.request(
             f"db/test/{jsonable_encoder(testid)}/test2/{jsonable_encoder(field2)}",
             method="POST",
+            json={
+                "field3": field3,
+            },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
-                return HttpResponse(response=_response, data=None)
+                _data = typing.cast(
+                    Generated4,
+                    parse_obj_as(
+                        type_=Generated4,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return HttpResponse(response=_response, data=_data)
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
@@ -160,9 +217,9 @@ class AsyncRawDbClient:
     def __init__(self, *, client_wrapper: AsyncClientWrapper):
         self._client_wrapper = client_wrapper
 
-    async def get_db_test_field1(
+    async def get_row_from_test(
         self, field1: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[None]:
+    ) -> AsyncHttpResponse[Generated2]:
         """
         Parameters
         ----------
@@ -173,7 +230,8 @@ class AsyncRawDbClient:
 
         Returns
         -------
-        AsyncHttpResponse[None]
+        AsyncHttpResponse[Generated2]
+            OK
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"db/test/{jsonable_encoder(field1)}",
@@ -182,35 +240,59 @@ class AsyncRawDbClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return AsyncHttpResponse(response=_response, data=None)
+                _data = typing.cast(
+                    Generated2,
+                    parse_obj_as(
+                        type_=Generated2,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def post_db_test_field1(
-        self, field1: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[None]:
+    async def add_row_into_test(
+        self, field1: str, *, field2: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[Generated1]:
         """
         Parameters
         ----------
         field1 : str
+
+        field2 : str
 
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[None]
+        AsyncHttpResponse[Generated1]
+            OK
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"db/test/{jsonable_encoder(field1)}",
             method="POST",
+            json={
+                "field2": field2,
+            },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
-                return AsyncHttpResponse(response=_response, data=None)
+                _data = typing.cast(
+                    Generated1,
+                    parse_obj_as(
+                        type_=Generated1,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),
@@ -227,9 +309,9 @@ class AsyncRawDbClient:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def get_db_test_testid_test2field2(
+    async def get_row_from_test2(
         self, testid: str, field2: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[None]:
+    ) -> AsyncHttpResponse[Generated5]:
         """
         Parameters
         ----------
@@ -242,7 +324,8 @@ class AsyncRawDbClient:
 
         Returns
         -------
-        AsyncHttpResponse[None]
+        AsyncHttpResponse[Generated5]
+            OK
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"db/test/{jsonable_encoder(testid)}/test2/{jsonable_encoder(field2)}",
@@ -251,15 +334,22 @@ class AsyncRawDbClient:
         )
         try:
             if 200 <= _response.status_code < 300:
-                return AsyncHttpResponse(response=_response, data=None)
+                _data = typing.cast(
+                    Generated5,
+                    parse_obj_as(
+                        type_=Generated5,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
             _response_json = _response.json()
         except JSONDecodeError:
             raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response.text)
         raise ApiError(status_code=_response.status_code, headers=dict(_response.headers), body=_response_json)
 
-    async def post_db_test_testid_test2field2(
-        self, testid: str, field2: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[None]:
+    async def add_row_to_test2with_foreign_key_to_test(
+        self, testid: str, field2: str, *, field3: str, request_options: typing.Optional[RequestOptions] = None
+    ) -> AsyncHttpResponse[Generated4]:
         """
         Parameters
         ----------
@@ -267,21 +357,38 @@ class AsyncRawDbClient:
 
         field2 : str
 
+        field3 : str
+
         request_options : typing.Optional[RequestOptions]
             Request-specific configuration.
 
         Returns
         -------
-        AsyncHttpResponse[None]
+        AsyncHttpResponse[Generated4]
+            OK
         """
         _response = await self._client_wrapper.httpx_client.request(
             f"db/test/{jsonable_encoder(testid)}/test2/{jsonable_encoder(field2)}",
             method="POST",
+            json={
+                "field3": field3,
+            },
+            headers={
+                "content-type": "application/json",
+            },
             request_options=request_options,
+            omit=OMIT,
         )
         try:
             if 200 <= _response.status_code < 300:
-                return AsyncHttpResponse(response=_response, data=None)
+                _data = typing.cast(
+                    Generated4,
+                    parse_obj_as(
+                        type_=Generated4,  # type: ignore
+                        object_=_response.json(),
+                    ),
+                )
+                return AsyncHttpResponse(response=_response, data=_data)
             if _response.status_code == 422:
                 raise UnprocessableEntityError(
                     headers=dict(_response.headers),

@@ -6,11 +6,6 @@ default-group: local
 groups:
   local:
     generators:
-      - name: fern-typescript-sdk
-        output:
-          location: local-file-system
-          path: ../fernclient/typescript
-        version: 3.49.3
       - name: fern-python-sdk
         version: 4.59.2
         output:

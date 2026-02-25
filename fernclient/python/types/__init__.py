@@ -7,8 +7,19 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .error import Error
+    from .generated1 import Generated1
+    from .generated2 import Generated2
+    from .generated4 import Generated4
+    from .generated5 import Generated5
     from .pagination_metadata import PaginationMetadata
-_dynamic_imports: typing.Dict[str, str] = {"Error": ".error", "PaginationMetadata": ".pagination_metadata"}
+_dynamic_imports: typing.Dict[str, str] = {
+    "Error": ".error",
+    "Generated1": ".generated1",
+    "Generated2": ".generated2",
+    "Generated4": ".generated4",
+    "Generated5": ".generated5",
+    "PaginationMetadata": ".pagination_metadata",
+}
 
 
 def __getattr__(attr_name: str) -> typing.Any:
@@ -32,4 +43,4 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["Error", "PaginationMetadata"]
+__all__ = ["Error", "Generated1", "Generated2", "Generated4", "Generated5", "PaginationMetadata"]
