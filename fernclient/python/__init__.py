@@ -6,19 +6,19 @@ import typing
 from importlib import import_module
 
 if typing.TYPE_CHECKING:
-    from .types import Error, Generated1, Generated2, Generated4, Generated5, PaginationMetadata
+    from .types import Error, PaginationMetadata, Test2GetResponse, Test2PostResponse, TestGetResponse, TestPostResponse
     from .errors import UnprocessableEntityError
     from . import db
     from .client import AsyncMineApi, MineApi
 _dynamic_imports: typing.Dict[str, str] = {
     "AsyncMineApi": ".client",
     "Error": ".types",
-    "Generated1": ".types",
-    "Generated2": ".types",
-    "Generated4": ".types",
-    "Generated5": ".types",
     "MineApi": ".client",
     "PaginationMetadata": ".types",
+    "Test2GetResponse": ".types",
+    "Test2PostResponse": ".types",
+    "TestGetResponse": ".types",
+    "TestPostResponse": ".types",
     "UnprocessableEntityError": ".errors",
     "db": ".db",
 }
@@ -48,12 +48,12 @@ def __dir__():
 __all__ = [
     "AsyncMineApi",
     "Error",
-    "Generated1",
-    "Generated2",
-    "Generated4",
-    "Generated5",
     "MineApi",
     "PaginationMetadata",
+    "Test2GetResponse",
+    "Test2PostResponse",
+    "TestGetResponse",
+    "TestPostResponse",
     "UnprocessableEntityError",
     "db",
 ]

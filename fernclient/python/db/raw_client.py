@@ -11,10 +11,10 @@ from ..core.pydantic_utilities import parse_obj_as
 from ..core.request_options import RequestOptions
 from ..errors.unprocessable_entity_error import UnprocessableEntityError
 from ..types.error import Error
-from ..types.generated1 import Generated1
-from ..types.generated2 import Generated2
-from ..types.generated4 import Generated4
-from ..types.generated5 import Generated5
+from ..types.test2get_response import Test2GetResponse
+from ..types.test2post_response import Test2PostResponse
+from ..types.test_get_response import TestGetResponse
+from ..types.test_post_response import TestPostResponse
 
 # this is used as the default value for optional parameters
 OMIT = typing.cast(typing.Any, ...)
@@ -26,7 +26,7 @@ class RawDbClient:
 
     def get_row_from_test(
         self, field1: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[Generated2]:
+    ) -> HttpResponse[TestGetResponse]:
         """
         Parameters
         ----------
@@ -37,7 +37,7 @@ class RawDbClient:
 
         Returns
         -------
-        HttpResponse[Generated2]
+        HttpResponse[TestGetResponse]
             OK
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -48,9 +48,9 @@ class RawDbClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Generated2,
+                    TestGetResponse,
                     parse_obj_as(
-                        type_=Generated2,  # type: ignore
+                        type_=TestGetResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -62,7 +62,7 @@ class RawDbClient:
 
     def add_row_into_test(
         self, field1: str, *, field2: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[Generated1]:
+    ) -> HttpResponse[TestPostResponse]:
         """
         Parameters
         ----------
@@ -75,7 +75,7 @@ class RawDbClient:
 
         Returns
         -------
-        HttpResponse[Generated1]
+        HttpResponse[TestPostResponse]
             OK
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -93,9 +93,9 @@ class RawDbClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Generated1,
+                    TestPostResponse,
                     parse_obj_as(
-                        type_=Generated1,  # type: ignore
+                        type_=TestPostResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -118,7 +118,7 @@ class RawDbClient:
 
     def get_row_from_test2(
         self, testid: str, field2: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[Generated5]:
+    ) -> HttpResponse[Test2GetResponse]:
         """
         Parameters
         ----------
@@ -131,7 +131,7 @@ class RawDbClient:
 
         Returns
         -------
-        HttpResponse[Generated5]
+        HttpResponse[Test2GetResponse]
             OK
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -142,9 +142,9 @@ class RawDbClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Generated5,
+                    Test2GetResponse,
                     parse_obj_as(
-                        type_=Generated5,  # type: ignore
+                        type_=Test2GetResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -156,7 +156,7 @@ class RawDbClient:
 
     def add_row_to_test2with_foreign_key_to_test(
         self, testid: str, field2: str, *, field3: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> HttpResponse[Generated4]:
+    ) -> HttpResponse[Test2PostResponse]:
         """
         Parameters
         ----------
@@ -171,7 +171,7 @@ class RawDbClient:
 
         Returns
         -------
-        HttpResponse[Generated4]
+        HttpResponse[Test2PostResponse]
             OK
         """
         _response = self._client_wrapper.httpx_client.request(
@@ -189,9 +189,9 @@ class RawDbClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Generated4,
+                    Test2PostResponse,
                     parse_obj_as(
-                        type_=Generated4,  # type: ignore
+                        type_=Test2PostResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -219,7 +219,7 @@ class AsyncRawDbClient:
 
     async def get_row_from_test(
         self, field1: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[Generated2]:
+    ) -> AsyncHttpResponse[TestGetResponse]:
         """
         Parameters
         ----------
@@ -230,7 +230,7 @@ class AsyncRawDbClient:
 
         Returns
         -------
-        AsyncHttpResponse[Generated2]
+        AsyncHttpResponse[TestGetResponse]
             OK
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -241,9 +241,9 @@ class AsyncRawDbClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Generated2,
+                    TestGetResponse,
                     parse_obj_as(
-                        type_=Generated2,  # type: ignore
+                        type_=TestGetResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -255,7 +255,7 @@ class AsyncRawDbClient:
 
     async def add_row_into_test(
         self, field1: str, *, field2: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[Generated1]:
+    ) -> AsyncHttpResponse[TestPostResponse]:
         """
         Parameters
         ----------
@@ -268,7 +268,7 @@ class AsyncRawDbClient:
 
         Returns
         -------
-        AsyncHttpResponse[Generated1]
+        AsyncHttpResponse[TestPostResponse]
             OK
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -286,9 +286,9 @@ class AsyncRawDbClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Generated1,
+                    TestPostResponse,
                     parse_obj_as(
-                        type_=Generated1,  # type: ignore
+                        type_=TestPostResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -311,7 +311,7 @@ class AsyncRawDbClient:
 
     async def get_row_from_test2(
         self, testid: str, field2: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[Generated5]:
+    ) -> AsyncHttpResponse[Test2GetResponse]:
         """
         Parameters
         ----------
@@ -324,7 +324,7 @@ class AsyncRawDbClient:
 
         Returns
         -------
-        AsyncHttpResponse[Generated5]
+        AsyncHttpResponse[Test2GetResponse]
             OK
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -335,9 +335,9 @@ class AsyncRawDbClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Generated5,
+                    Test2GetResponse,
                     parse_obj_as(
-                        type_=Generated5,  # type: ignore
+                        type_=Test2GetResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )
@@ -349,7 +349,7 @@ class AsyncRawDbClient:
 
     async def add_row_to_test2with_foreign_key_to_test(
         self, testid: str, field2: str, *, field3: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> AsyncHttpResponse[Generated4]:
+    ) -> AsyncHttpResponse[Test2PostResponse]:
         """
         Parameters
         ----------
@@ -364,7 +364,7 @@ class AsyncRawDbClient:
 
         Returns
         -------
-        AsyncHttpResponse[Generated4]
+        AsyncHttpResponse[Test2PostResponse]
             OK
         """
         _response = await self._client_wrapper.httpx_client.request(
@@ -382,9 +382,9 @@ class AsyncRawDbClient:
         try:
             if 200 <= _response.status_code < 300:
                 _data = typing.cast(
-                    Generated4,
+                    Test2PostResponse,
                     parse_obj_as(
-                        type_=Generated4,  # type: ignore
+                        type_=Test2PostResponse,  # type: ignore
                         object_=_response.json(),
                     ),
                 )

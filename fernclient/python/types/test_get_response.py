@@ -6,7 +6,7 @@ import pydantic
 from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 
 
-class Generated2(UniversalBaseModel):
+class TestGetResponse(UniversalBaseModel):
     id: typing.Optional[int] = None
     field1: str
     field2: str

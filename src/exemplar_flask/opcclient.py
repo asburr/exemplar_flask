@@ -1,33 +1,42 @@
 import argparse
 import os
-from fernclient.python.client import MineApi
+from openapi_python_client.test_api_client import Client
+from openapi_python_client.test_api_client.api.db.get_db_test_field1 import sync as get_db_test_field1
+from openapi_python_client.test_api_client.api.db.post_db_test_field1 import sync as post_db_test_field1
+from openapi_python_client.test_api_client.api.db.get_db_test_testid_test2_field2 import sync as get_db_test_testid_test2_field2
+from openapi_python_client.test_api_client.api.db.post_db_test_testid_test2_field2 import sync as post_db_test_testid_test2_field2
+from openapi_python_client.test_api_client.models.test_post_request_json import TestPostRequestJson
+from openapi_python_client.test_api_client.models.test_2_post_request_json import Test2PostRequestJson
 
 
-class FernClient():
+class OpcClient():
   
   def __init__(self,url="http://127.0.0.1:5000"):
-    self.api = MineApi(base_url=url)
+    self.url=url
 
-class FernTest():
+class OpcTest():
   
-  def __init__(self,client:FernClient,field1:str):
+  def __init__(self,client:OpcClient,field1:str):
     self.client=client
     self.field1=field1
 
   def post(self,field2:str):
-    self.client.api.db.add_row_into_test(field1=self.field1,field2=field2)
+    with Client(base_url=self.client.url) as client:
+      body: TestPostRequestJson = TestPostRequestJson(field2)
+      post_db_test_field1(client=client,field1=self.field1,body=body)
 
   def get(self) -> dict:
-    return self.client.api.db.get_row_from_test(field1=self.field1)
+    with Client(base_url=self.client.url) as client:
+      return get_db_test_field1(client=client,field1=self.field1)
 
   @classmethod
   def arg_post(cls,args):
-    test = FernTest(FernClient(),args.field1)
+    test = OpcTest(OpcClient(),args.field1)
     test.post(args.field2)
     
   @classmethod
   def arg_get(cls,args) -> dict:
-    test = FernTest(FernClient(),args.field1)
+    test = OpcTest(OpcClient(),args.field1)
     return test.get()
 
   @classmethod
@@ -42,31 +51,34 @@ class FernTest():
     get.set_defaults(func=cls.arg_get)
     get.add_argument("field1",help="get field1")
     
-class FernTest2():
+class OpcTest2():
   
-  def __init__(self,test:FernTest,field2:str):
+  def __init__(self,test:OpcTest,field2:str):
     self.test=test
     self.field2=field2
 
   def post(self,field3:str):
-    self.test.client.api.db.add_row_to_test2with_foreign_key_to_test(
-      testid=self.test.field1,
-      field2=self.field2,
-      field3=field3)
+    with Client(base_url=self.test.client.url) as client:
+      body: Test2PostRequestJson = Test2PostRequestJson(field3)
+      post_db_test_testid_test2_field2(client=client,
+        testid=self.test.field1,
+        field2=self.field2,
+        body=body)
  
   def get(self) -> dict:
-    return self.test.client.api.db.get_row_from_test2(testid="value1",field2="value2")
+    with Client(base_url=self.test.client.url) as client:
+      return get_db_test_testid_test2_field2(client=client,testid="value1",field2="value2")
 
   @classmethod
   def arg_post(cls,args):
-    test = FernTest(FernClient(),args.field1)
-    test2 = FernTest2(test,args.field2)
+    test = OpcTest(OpcClient(),args.field1)
+    test2 = OpcTest2(test,args.field2)
     test2.post(args.field3)
 
   @classmethod
   def arg_get(cls,args) -> dict:
-    test = FernTest(FernClient(),args.field1)
-    test2 = FernTest2(test,args.field2)
+    test = OpcTest(OpcClient(),args.field1)
+    test2 = OpcTest2(test,args.field2)
     return test2.get()
 
   @classmethod
@@ -84,10 +96,10 @@ class FernTest2():
     get.add_argument("field2",help="get field2")
 
 def main():
-  parser = argparse.ArgumentParser(description="FernClient")
+  parser = argparse.ArgumentParser(description="OpcClient")
   command = parser.add_subparsers(dest="command",help="commands")
-  FernTest.argsp(command)
-  FernTest2.argsp(command)
+  OpcTest.argsp(command)
+  OpcTest2.argsp(command)
   a = parser.parse_args()
   if not hasattr(a, 'func'):
     parser.print_help()

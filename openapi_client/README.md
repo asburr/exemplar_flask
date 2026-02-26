@@ -70,7 +70,10 @@ with openapi_client.ApiClient(configuration) as api_client:
     field1 = 'field1_example' # str | 
 
     try:
-        api_instance.db_test_field1_get(field1)
+        # Get row from test.
+        api_response = api_instance.db_test_field1_get(field1)
+        print("The response of DbApi->db_test_field1_get:\n")
+        pprint(api_response)
     except ApiException as e:
         print("Exception when calling DbApi->db_test_field1_get: %s\n" % e)
 
@@ -82,15 +85,19 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DbApi* | [**db_test_field1_get**](docs/DbApi.md#db_test_field1_get) | **GET** /db/test/{field1} | 
-*DbApi* | [**db_test_field1_post**](docs/DbApi.md#db_test_field1_post) | **POST** /db/test/{field1} | 
-*DbApi* | [**db_test_testid_test2_field2_get**](docs/DbApi.md#db_test_testid_test2_field2_get) | **GET** /db/test/{testid}/test2/{field2} | 
-*DbApi* | [**db_test_testid_test2_field2_post**](docs/DbApi.md#db_test_testid_test2_field2_post) | **POST** /db/test/{testid}/test2/{field2} | 
+*DbApi* | [**db_test_field1_get**](docs/DbApi.md#db_test_field1_get) | **GET** /db/test/{field1} | Get row from test.
+*DbApi* | [**db_test_field1_post**](docs/DbApi.md#db_test_field1_post) | **POST** /db/test/{field1} | Add row into test.
+*DbApi* | [**db_test_testid_test2_field2_get**](docs/DbApi.md#db_test_testid_test2_field2_get) | **GET** /db/test/{testid}/test2/{field2} | Get row from test2.
+*DbApi* | [**db_test_testid_test2_field2_post**](docs/DbApi.md#db_test_testid_test2_field2_post) | **POST** /db/test/{testid}/test2/{field2} | Add row to test2 with foreign key to test.
 
 
 ## Documentation For Models
 
  - [Error](docs/Error.md)
+ - [Generated](docs/Generated.md)
+ - [Generated2](docs/Generated2.md)
+ - [Generated3](docs/Generated3.md)
+ - [Generated5](docs/Generated5.md)
  - [PaginationMetadata](docs/PaginationMetadata.md)
 
 

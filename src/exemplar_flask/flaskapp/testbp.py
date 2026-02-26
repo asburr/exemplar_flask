@@ -1,7 +1,7 @@
 """ This module is a flask project to demo REST endpoints and REST clients. """
 try:
   from flask_smorest import Blueprint
-  from marshmallow import (Schema, fields, EXCLUDE)
+  from marshmallow import (Schema, fields)
 except ImportError:
   from flask import Blueprint
 from flask import (request, jsonify)
@@ -11,22 +11,25 @@ from functools import wraps
 mapping = {str: fields.Str(required=True), int: fields.Int(), 
            bool: fields.Bool(), float: fields.Float()}
 
-def http_response(params:dict[str,type], columns:dict[str,type]={}, code:int=200 ):
+def http_response(code:int=200,columns:dict[str,type]=None):
   """ Success response code if using smorest. """
-  if hasattr(bp, 'response'):
-      marshmallow_columns = {k: mapping[v] for k, v in columns.items()}
-      schema = Schema.from_dict(marshmallow_columns)
-      return bp.response(code, schema)
-  return lambda f: f  # Do nothing if standard Flask
+  if columns is None: columns={}
+  def decorator(f):
+    if hasattr(bp, 'response'):
+        marshmallow_columns = {k: mapping[v] for k, v in columns.items()}
+        schema = Schema.from_dict(marshmallow_columns,name=f"{f.__name__}_response")
+        return bp.response(code, schema)(f)
+    return f
+  return decorator
 
 def http_arguments(params: dict[str, type]):
   """ Extracts arguments from the http query parameters. """
-  if hasattr(bp, 'arguments'):
-      marshmallow_params = {k: mapping[v] for k, v in params.items()}
-      schema = Schema.from_dict(marshmallow_params)
-      return bp.arguments(schema, location="query", as_kwargs=True)
-  else:
-    def decorator(f):
+  def decorator(f):
+    if hasattr(bp, 'arguments'):
+        marshmallow_params = {k: mapping[v] for k, v in params.items()}
+        schema = Schema.from_dict(marshmallow_params,name=f"{f.__name__}_request_args")
+        return bp.arguments(schema, location="query", as_kwargs=True)(f)
+    else:
       """ Decorator runs once and creates the wrapper. """
       @wraps(f)
       def wrapper(*args, **kwargs):
@@ -35,21 +38,18 @@ def http_arguments(params: dict[str, type]):
           kwargs[k] = request.args.get(k)
         return f(*args, **kwargs)
       return wrapper
-    return decorator
+  return decorator
 
 def http_jsonbody(params: dict[str, type]):
   """ Extracts arguments from the http json body. """
-  if hasattr(bp, 'arguments'):
-      mapping = {str: fields.Str(required=True), int: fields.Int(), 
-                 bool: fields.Bool(), float: fields.Float()}
-      marshmallow_params = {k: mapping[v] for k, v in params.items()}
-      class DynamicSchema(Schema):
-        class Meta:
-            unknown = EXCLUDE
-      schema = Schema.from_dict(marshmallow_params)
-      return bp.arguments(schema, location="json", as_kwargs=True)
-  else:
-    def decorator(f):
+  def decorator(f):
+    if hasattr(bp, 'arguments'):
+        mapping = {str: fields.Str(required=True), int: fields.Int(), 
+                   bool: fields.Bool(), float: fields.Float()}
+        marshmallow_params = {k: mapping[v] for k, v in params.items()}
+        schema = Schema.from_dict(marshmallow_params,name=f"{f.__name__}_request_json")
+        return bp.arguments(schema, location="json", as_kwargs=True)(f)
+    else:
       """ Decorator runs once and creates the wrapper. """
       @wraps(f)
       def wrapper(*args, **kwargs):
@@ -59,7 +59,7 @@ def http_jsonbody(params: dict[str, type]):
           kwargs[k] = j.get(k)
         return f(*args, **kwargs)
       return wrapper
-    return decorator
+  return decorator
 
 bp = Blueprint('db', __name__, url_prefix='/db')
 

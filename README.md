@@ -24,21 +24,28 @@ cd projects/exempler_flask
 poetry lock
 poetry sync --with dev,inhouse_wsdev,inhouse_wsprod
 ./flaskclient.sh test post value1 value1.2
-None
 ./flaskclient.sh test get value1
-{'field1': 'value1', 'field2': 'value1.2', 'id': 1}
 ./flaskclient.sh test2 post value1 value2 value2.1
-None
 ./flaskclient.sh test2 get value1 value2
-{'field2': 'Tue, 24 Feb 2026 14:20:58 GMT', 'field3': 'value2', 'id': 1, 'test_id': 'value1'}
 ```
 ## Multiple manual clients
-There is a client for fern and others might follow.
+The fern client plugged into the 
 ```
+poetry add --group main httpx
+poetry add --group main pydantic
 ./fernclient.sh test post value1 value1.2
 ./fernclient.sh test get value1
 ./fernclient.sh test2 post value1 value2 value2.1
 ./fernclient.sh test2 get value1 value2
+
+```
+There is a client for fern and others might follow.
+```
+poetry add --group main attrs
+./opcclient.sh test post value1 value1.2
+./opcclient.sh test get value1
+./opcclient.sh test2 post value1 value2 value2.1
+./opcclient.sh test2 get value1 value2
 
 ```
 ## openapi schema
@@ -68,28 +75,21 @@ Using openapi-python-client to generate a Python client.
 ```
 cd projects/exempler_flask
 ./openapipythongen.sh
+touch openapi_python_client/__init__.py
 ```
 client is output to openapi_python_client/.
+```
+poetry add --group main attrs
+poetry run python
+from openapi_python_client.test_api_client import Client
+
+```
 ## fern client
 Generate the fern Python client.
 client is output to fernclient/.
 ```
 cd projects/exempler_flask
 ./fern_gen.sh
-```
-Using the client.
-```
-poetry add --group main httpx
-poetry add --group main pydantic
-cd projects/exempler_flask
-poetry run python
-#from fernclient.python.db.client import DbClient
-from fernclient.python.client import MineApi
-a = MineApi(base_url="http://127.0.0.1:5000/")
-a.db.add_row_into_test(field1="value1",field2="value1.2")
-a.db.get_row_from_test(field1="value1")
-a.db.add_row_to_test2with_foreign_key_to_test(testid="value1",field2="value2",field3="value2.1")
-a.db.get_row_from_test2(testid="value1",field2="value2")
 ```
 ## Version History
 * 0.1

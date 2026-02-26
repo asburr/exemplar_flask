@@ -1,18 +1,23 @@
 from http import HTTPStatus
-from typing import Any, cast
+from typing import Any
 from urllib.parse import quote
 
 import httpx
 
 from ...client import AuthenticatedClient, Client
 from ...models.error import Error
+from ...models.test_2_post_request_json import Test2PostRequestJson
+from ...models.test_2_post_response import Test2PostResponse
 from ...types import Response
 
 
 def _get_kwargs(
     testid: str,
     field2: str,
+    *,
+    body: Test2PostRequestJson,
 ) -> dict[str, Any]:
+    headers: dict[str, Any] = {}
 
     _kwargs: dict[str, Any] = {
         "method": "post",
@@ -22,12 +27,18 @@ def _get_kwargs(
         ),
     }
 
+    _kwargs["json"] = body.to_dict()
+
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
     return _kwargs
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | Error:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | Test2PostResponse:
     if response.status_code == 200:
-        response_200 = cast(Any, None)
+        response_200 = Test2PostResponse.from_dict(response.json())
+
         return response_200
 
     if response.status_code == 422:
@@ -40,7 +51,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     return response_default
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | Error]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Error | Test2PostResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -54,23 +67,27 @@ def sync_detailed(
     field2: str,
     *,
     client: AuthenticatedClient | Client,
-) -> Response[Any | Error]:
-    """
+    body: Test2PostRequestJson,
+) -> Response[Error | Test2PostResponse]:
+    """Add row to test2 with foreign key to test.
+
     Args:
         testid (str):
         field2 (str):
+        body (Test2PostRequestJson):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error]
+        Response[Error | Test2PostResponse]
     """
 
     kwargs = _get_kwargs(
         testid=testid,
         field2=field2,
+        body=body,
     )
 
     response = client.get_httpx_client().request(
@@ -85,24 +102,28 @@ def sync(
     field2: str,
     *,
     client: AuthenticatedClient | Client,
-) -> Any | Error | None:
-    """
+    body: Test2PostRequestJson,
+) -> Error | Test2PostResponse | None:
+    """Add row to test2 with foreign key to test.
+
     Args:
         testid (str):
         field2 (str):
+        body (Test2PostRequestJson):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error
+        Error | Test2PostResponse
     """
 
     return sync_detailed(
         testid=testid,
         field2=field2,
         client=client,
+        body=body,
     ).parsed
 
 
@@ -111,23 +132,27 @@ async def asyncio_detailed(
     field2: str,
     *,
     client: AuthenticatedClient | Client,
-) -> Response[Any | Error]:
-    """
+    body: Test2PostRequestJson,
+) -> Response[Error | Test2PostResponse]:
+    """Add row to test2 with foreign key to test.
+
     Args:
         testid (str):
         field2 (str):
+        body (Test2PostRequestJson):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error]
+        Response[Error | Test2PostResponse]
     """
 
     kwargs = _get_kwargs(
         testid=testid,
         field2=field2,
+        body=body,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -140,18 +165,21 @@ async def asyncio(
     field2: str,
     *,
     client: AuthenticatedClient | Client,
-) -> Any | Error | None:
-    """
+    body: Test2PostRequestJson,
+) -> Error | Test2PostResponse | None:
+    """Add row to test2 with foreign key to test.
+
     Args:
         testid (str):
         field2 (str):
+        body (Test2PostRequestJson):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error
+        Error | Test2PostResponse
     """
 
     return (
@@ -159,5 +187,6 @@ async def asyncio(
             testid=testid,
             field2=field2,
             client=client,
+            body=body,
         )
     ).parsed

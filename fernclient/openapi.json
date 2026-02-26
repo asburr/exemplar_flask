@@ -51,7 +51,7 @@
         },
         "additionalProperties": false
       },
-      "Generated": {
+      "test_post_request_json": {
         "type": "object",
         "properties": {
           "field2": {
@@ -63,12 +63,12 @@
         ],
         "additionalProperties": false
       },
-      "Generated1": {
+      "test_post_response": {
         "type": "object",
         "properties": {},
         "additionalProperties": false
       },
-      "Generated2": {
+      "test_get_response": {
         "type": "object",
         "properties": {
           "id": {
@@ -87,7 +87,7 @@
         ],
         "additionalProperties": false
       },
-      "Generated3": {
+      "test2_post_request_json": {
         "type": "object",
         "properties": {
           "field3": {
@@ -99,12 +99,12 @@
         ],
         "additionalProperties": false
       },
-      "Generated4": {
+      "test2_post_response": {
         "type": "object",
         "properties": {},
         "additionalProperties": false
       },
-      "Generated5": {
+      "test2_get_response": {
         "type": "object",
         "properties": {
           "id": {
@@ -163,7 +163,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Generated1"
+                  "$ref": "#/components/schemas/test_post_response"
                 }
               }
             }
@@ -177,7 +177,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Generated"
+                "$ref": "#/components/schemas/test_post_request_json"
               }
             }
           }
@@ -205,7 +205,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Generated2"
+                  "$ref": "#/components/schemas/test_get_response"
                 }
               }
             }
@@ -231,7 +231,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Generated4"
+                  "$ref": "#/components/schemas/test2_post_response"
                 }
               }
             }
@@ -245,7 +245,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Generated3"
+                "$ref": "#/components/schemas/test2_post_request_json"
               }
             }
           }
@@ -282,7 +282,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Generated5"
+                  "$ref": "#/components/schemas/test2_get_response"
                 }
               }
             }

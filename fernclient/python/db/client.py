@@ -4,10 +4,10 @@ import typing
 
 from ..core.client_wrapper import AsyncClientWrapper, SyncClientWrapper
 from ..core.request_options import RequestOptions
-from ..types.generated1 import Generated1
-from ..types.generated2 import Generated2
-from ..types.generated4 import Generated4
-from ..types.generated5 import Generated5
+from ..types.test2get_response import Test2GetResponse
+from ..types.test2post_response import Test2PostResponse
+from ..types.test_get_response import TestGetResponse
+from ..types.test_post_response import TestPostResponse
 from .raw_client import AsyncRawDbClient, RawDbClient
 
 # this is used as the default value for optional parameters
@@ -29,7 +29,9 @@ class DbClient:
         """
         return self._raw_client
 
-    def get_row_from_test(self, field1: str, *, request_options: typing.Optional[RequestOptions] = None) -> Generated2:
+    def get_row_from_test(
+        self, field1: str, *, request_options: typing.Optional[RequestOptions] = None
+    ) -> TestGetResponse:
         """
         Parameters
         ----------
@@ -40,7 +42,7 @@ class DbClient:
 
         Returns
         -------
-        Generated2
+        TestGetResponse
             OK
 
         Examples
@@ -59,7 +61,7 @@ class DbClient:
 
     def add_row_into_test(
         self, field1: str, *, field2: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> Generated1:
+    ) -> TestPostResponse:
         """
         Parameters
         ----------
@@ -72,7 +74,7 @@ class DbClient:
 
         Returns
         -------
-        Generated1
+        TestPostResponse
             OK
 
         Examples
@@ -92,7 +94,7 @@ class DbClient:
 
     def get_row_from_test2(
         self, testid: str, field2: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> Generated5:
+    ) -> Test2GetResponse:
         """
         Parameters
         ----------
@@ -105,7 +107,7 @@ class DbClient:
 
         Returns
         -------
-        Generated5
+        Test2GetResponse
             OK
 
         Examples
@@ -125,7 +127,7 @@ class DbClient:
 
     def add_row_to_test2with_foreign_key_to_test(
         self, testid: str, field2: str, *, field3: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> Generated4:
+    ) -> Test2PostResponse:
         """
         Parameters
         ----------
@@ -140,7 +142,7 @@ class DbClient:
 
         Returns
         -------
-        Generated4
+        Test2PostResponse
             OK
 
         Examples
@@ -179,7 +181,7 @@ class AsyncDbClient:
 
     async def get_row_from_test(
         self, field1: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> Generated2:
+    ) -> TestGetResponse:
         """
         Parameters
         ----------
@@ -190,7 +192,7 @@ class AsyncDbClient:
 
         Returns
         -------
-        Generated2
+        TestGetResponse
             OK
 
         Examples
@@ -217,7 +219,7 @@ class AsyncDbClient:
 
     async def add_row_into_test(
         self, field1: str, *, field2: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> Generated1:
+    ) -> TestPostResponse:
         """
         Parameters
         ----------
@@ -230,7 +232,7 @@ class AsyncDbClient:
 
         Returns
         -------
-        Generated1
+        TestPostResponse
             OK
 
         Examples
@@ -258,7 +260,7 @@ class AsyncDbClient:
 
     async def get_row_from_test2(
         self, testid: str, field2: str, *, request_options: typing.Optional[RequestOptions] = None
-    ) -> Generated5:
+    ) -> Test2GetResponse:
         """
         Parameters
         ----------
@@ -271,7 +273,7 @@ class AsyncDbClient:
 
         Returns
         -------
-        Generated5
+        Test2GetResponse
             OK
 
         Examples
@@ -299,7 +301,7 @@ class AsyncDbClient:
 
     async def add_row_to_test2with_foreign_key_to_test(
         self, testid: str, field2: str, *, field3: str, request_options: typing.Optional[RequestOptions] = None
-    ) -> Generated4:
+    ) -> Test2PostResponse:
         """
         Parameters
         ----------
@@ -314,7 +316,7 @@ class AsyncDbClient:
 
         Returns
         -------
-        Generated4
+        Test2PostResponse
             OK
 
         Examples

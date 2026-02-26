@@ -16,7 +16,12 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field
+from typing import Any, Dict
 from typing_extensions import Annotated
+from openapi_client.models.generated import Generated
+from openapi_client.models.generated2 import Generated2
+from openapi_client.models.generated3 import Generated3
+from openapi_client.models.generated5 import Generated5
 
 from openapi_client.api_client import ApiClient, RequestSerialized
 from openapi_client.api_response import ApiResponse
@@ -52,8 +57,8 @@ class DbApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """db_test_field1_get
+    ) -> Generated2:
+        """Get row from test.
 
 
         :param field1: (required)
@@ -89,7 +94,7 @@ class DbApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "Generated2",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -118,8 +123,8 @@ class DbApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """db_test_field1_get
+    ) -> ApiResponse[Generated2]:
+        """Get row from test.
 
 
         :param field1: (required)
@@ -155,7 +160,7 @@ class DbApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "Generated2",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -185,7 +190,7 @@ class DbApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """db_test_field1_get
+        """Get row from test.
 
 
         :param field1: (required)
@@ -221,7 +226,7 @@ class DbApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "Generated2",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -297,6 +302,7 @@ class DbApi:
     def db_test_field1_post(
         self,
         field1: Annotated[str, Field(min_length=1, strict=True)],
+        generated: Generated,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -309,12 +315,14 @@ class DbApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """db_test_field1_post
+    ) -> object:
+        """Add row into test.
 
 
         :param field1: (required)
         :type field1: str
+        :param generated: (required)
+        :type generated: Generated
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -339,6 +347,7 @@ class DbApi:
 
         _param = self._db_test_field1_post_serialize(
             field1=field1,
+            generated=generated,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -347,7 +356,7 @@ class DbApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '422': "Error",
-            '200': None,
+            '200': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -364,6 +373,7 @@ class DbApi:
     def db_test_field1_post_with_http_info(
         self,
         field1: Annotated[str, Field(min_length=1, strict=True)],
+        generated: Generated,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -376,12 +386,14 @@ class DbApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """db_test_field1_post
+    ) -> ApiResponse[object]:
+        """Add row into test.
 
 
         :param field1: (required)
         :type field1: str
+        :param generated: (required)
+        :type generated: Generated
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -406,6 +418,7 @@ class DbApi:
 
         _param = self._db_test_field1_post_serialize(
             field1=field1,
+            generated=generated,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -414,7 +427,7 @@ class DbApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '422': "Error",
-            '200': None,
+            '200': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -431,6 +444,7 @@ class DbApi:
     def db_test_field1_post_without_preload_content(
         self,
         field1: Annotated[str, Field(min_length=1, strict=True)],
+        generated: Generated,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -444,11 +458,13 @@ class DbApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """db_test_field1_post
+        """Add row into test.
 
 
         :param field1: (required)
         :type field1: str
+        :param generated: (required)
+        :type generated: Generated
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -473,6 +489,7 @@ class DbApi:
 
         _param = self._db_test_field1_post_serialize(
             field1=field1,
+            generated=generated,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -481,7 +498,7 @@ class DbApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '422': "Error",
-            '200': None,
+            '200': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -493,6 +510,7 @@ class DbApi:
     def _db_test_field1_post_serialize(
         self,
         field1,
+        generated,
         _request_auth,
         _content_type,
         _headers,
@@ -520,6 +538,8 @@ class DbApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if generated is not None:
+            _body_params = generated
 
 
         # set the HTTP header `Accept`
@@ -530,6 +550,19 @@ class DbApi:
                 ]
             )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
@@ -570,8 +603,8 @@ class DbApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """db_test_testid_test2_field2_get
+    ) -> Generated5:
+        """Get row from test2.
 
 
         :param testid: (required)
@@ -610,7 +643,7 @@ class DbApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "Generated5",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -640,8 +673,8 @@ class DbApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """db_test_testid_test2_field2_get
+    ) -> ApiResponse[Generated5]:
+        """Get row from test2.
 
 
         :param testid: (required)
@@ -680,7 +713,7 @@ class DbApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "Generated5",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -711,7 +744,7 @@ class DbApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """db_test_testid_test2_field2_get
+        """Get row from test2.
 
 
         :param testid: (required)
@@ -750,7 +783,7 @@ class DbApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
+            '200': "Generated5",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -830,6 +863,7 @@ class DbApi:
         self,
         testid: Annotated[str, Field(min_length=1, strict=True)],
         field2: Annotated[str, Field(min_length=1, strict=True)],
+        generated3: Generated3,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -842,14 +876,16 @@ class DbApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """db_test_testid_test2_field2_post
+    ) -> object:
+        """Add row to test2 with foreign key to test.
 
 
         :param testid: (required)
         :type testid: str
         :param field2: (required)
         :type field2: str
+        :param generated3: (required)
+        :type generated3: Generated3
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -875,6 +911,7 @@ class DbApi:
         _param = self._db_test_testid_test2_field2_post_serialize(
             testid=testid,
             field2=field2,
+            generated3=generated3,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -883,7 +920,7 @@ class DbApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '422': "Error",
-            '200': None,
+            '200': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -901,6 +938,7 @@ class DbApi:
         self,
         testid: Annotated[str, Field(min_length=1, strict=True)],
         field2: Annotated[str, Field(min_length=1, strict=True)],
+        generated3: Generated3,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -913,14 +951,16 @@ class DbApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[None]:
-        """db_test_testid_test2_field2_post
+    ) -> ApiResponse[object]:
+        """Add row to test2 with foreign key to test.
 
 
         :param testid: (required)
         :type testid: str
         :param field2: (required)
         :type field2: str
+        :param generated3: (required)
+        :type generated3: Generated3
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -946,6 +986,7 @@ class DbApi:
         _param = self._db_test_testid_test2_field2_post_serialize(
             testid=testid,
             field2=field2,
+            generated3=generated3,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -954,7 +995,7 @@ class DbApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '422': "Error",
-            '200': None,
+            '200': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -972,6 +1013,7 @@ class DbApi:
         self,
         testid: Annotated[str, Field(min_length=1, strict=True)],
         field2: Annotated[str, Field(min_length=1, strict=True)],
+        generated3: Generated3,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -985,13 +1027,15 @@ class DbApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """db_test_testid_test2_field2_post
+        """Add row to test2 with foreign key to test.
 
 
         :param testid: (required)
         :type testid: str
         :param field2: (required)
         :type field2: str
+        :param generated3: (required)
+        :type generated3: Generated3
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1017,6 +1061,7 @@ class DbApi:
         _param = self._db_test_testid_test2_field2_post_serialize(
             testid=testid,
             field2=field2,
+            generated3=generated3,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1025,7 +1070,7 @@ class DbApi:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '422': "Error",
-            '200': None,
+            '200': "object",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1038,6 +1083,7 @@ class DbApi:
         self,
         testid,
         field2,
+        generated3,
         _request_auth,
         _content_type,
         _headers,
@@ -1067,6 +1113,8 @@ class DbApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
+        if generated3 is not None:
+            _body_params = generated3
 
 
         # set the HTTP header `Accept`
@@ -1077,6 +1125,19 @@ class DbApi:
                 ]
             )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [

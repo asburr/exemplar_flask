@@ -1,11 +1,12 @@
 from http import HTTPStatus
-from typing import Any, cast
+from typing import Any
 from urllib.parse import quote
 
 import httpx
 
 from ...client import AuthenticatedClient, Client
 from ...models.error import Error
+from ...models.test_2_get_response import Test2GetResponse
 from ...types import Response
 
 
@@ -25,9 +26,10 @@ def _get_kwargs(
     return _kwargs
 
 
-def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Any | Error:
+def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Error | Test2GetResponse:
     if response.status_code == 200:
-        response_200 = cast(Any, None)
+        response_200 = Test2GetResponse.from_dict(response.json())
+
         return response_200
 
     response_default = Error.from_dict(response.json())
@@ -35,7 +37,9 @@ def _parse_response(*, client: AuthenticatedClient | Client, response: httpx.Res
     return response_default
 
 
-def _build_response(*, client: AuthenticatedClient | Client, response: httpx.Response) -> Response[Any | Error]:
+def _build_response(
+    *, client: AuthenticatedClient | Client, response: httpx.Response
+) -> Response[Error | Test2GetResponse]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -49,8 +53,9 @@ def sync_detailed(
     field2: str,
     *,
     client: AuthenticatedClient | Client,
-) -> Response[Any | Error]:
-    """
+) -> Response[Error | Test2GetResponse]:
+    """Get row from test2.
+
     Args:
         testid (str):
         field2 (str):
@@ -60,7 +65,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error]
+        Response[Error | Test2GetResponse]
     """
 
     kwargs = _get_kwargs(
@@ -80,8 +85,9 @@ def sync(
     field2: str,
     *,
     client: AuthenticatedClient | Client,
-) -> Any | Error | None:
-    """
+) -> Error | Test2GetResponse | None:
+    """Get row from test2.
+
     Args:
         testid (str):
         field2 (str):
@@ -91,7 +97,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error
+        Error | Test2GetResponse
     """
 
     return sync_detailed(
@@ -106,8 +112,9 @@ async def asyncio_detailed(
     field2: str,
     *,
     client: AuthenticatedClient | Client,
-) -> Response[Any | Error]:
-    """
+) -> Response[Error | Test2GetResponse]:
+    """Get row from test2.
+
     Args:
         testid (str):
         field2 (str):
@@ -117,7 +124,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[Any | Error]
+        Response[Error | Test2GetResponse]
     """
 
     kwargs = _get_kwargs(
@@ -135,8 +142,9 @@ async def asyncio(
     field2: str,
     *,
     client: AuthenticatedClient | Client,
-) -> Any | Error | None:
-    """
+) -> Error | Test2GetResponse | None:
+    """Get row from test2.
+
     Args:
         testid (str):
         field2 (str):
@@ -146,7 +154,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Any | Error
+        Error | Test2GetResponse
     """
 
     return (

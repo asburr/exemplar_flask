@@ -50,6 +50,82 @@
           }
         },
         "additionalProperties": false
+      },
+      "Generated": {
+        "type": "object",
+        "properties": {
+          "field2": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "field2"
+        ],
+        "additionalProperties": false
+      },
+      "Generated1": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "Generated2": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "field1": {
+            "type": "string"
+          },
+          "field2": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "field1",
+          "field2"
+        ],
+        "additionalProperties": false
+      },
+      "Generated3": {
+        "type": "object",
+        "properties": {
+          "field3": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "field3"
+        ],
+        "additionalProperties": false
+      },
+      "Generated4": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "Generated5": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "test_id": {
+            "type": "string"
+          },
+          "field2": {
+            "type": "string"
+          },
+          "field3": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "field2",
+          "field3",
+          "test_id"
+        ],
+        "additionalProperties": false
       }
     },
     "responses": {
@@ -78,18 +154,35 @@
   "paths": {
     "/db/test/{field1}": {
       "post": {
-        "parameters": [],
         "responses": {
           "422": {
             "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
           },
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Generated1"
+                }
+              }
+            }
           },
           "default": {
             "$ref": "#/components/responses/DEFAULT_ERROR"
           }
         },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Generated"
+              }
+            }
+          }
+        },
+        "summary": "Add row into test.",
         "tags": [
           "db"
         ]
@@ -108,12 +201,20 @@
       "get": {
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Generated2"
+                }
+              }
+            }
           },
           "default": {
             "$ref": "#/components/responses/DEFAULT_ERROR"
           }
         },
+        "summary": "Get row from test.",
         "tags": [
           "db"
         ]
@@ -121,18 +222,35 @@
     },
     "/db/test/{testid}/test2/{field2}": {
       "post": {
-        "parameters": [],
         "responses": {
           "422": {
             "$ref": "#/components/responses/UNPROCESSABLE_ENTITY"
           },
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Generated4"
+                }
+              }
+            }
           },
           "default": {
             "$ref": "#/components/responses/DEFAULT_ERROR"
           }
         },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Generated3"
+              }
+            }
+          }
+        },
+        "summary": "Add row to test2 with foreign key to test.",
         "tags": [
           "db"
         ]
@@ -160,12 +278,20 @@
       "get": {
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Generated5"
+                }
+              }
+            }
           },
           "default": {
             "$ref": "#/components/responses/DEFAULT_ERROR"
           }
         },
+        "summary": "Get row from test2.",
         "tags": [
           "db"
         ]

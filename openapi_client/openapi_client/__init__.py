@@ -29,6 +29,10 @@ __all__ = [
     "ApiAttributeError",
     "ApiException",
     "Error",
+    "Generated",
+    "Generated2",
+    "Generated3",
+    "Generated5",
     "PaginationMetadata",
 ]
 
@@ -48,5 +52,9 @@ from openapi_client.exceptions import ApiException as ApiException
 
 # import models into sdk package
 from openapi_client.models.error import Error as Error
+from openapi_client.models.generated import Generated as Generated
+from openapi_client.models.generated2 import Generated2 as Generated2
+from openapi_client.models.generated3 import Generated3 as Generated3
+from openapi_client.models.generated5 import Generated5 as Generated5
 from openapi_client.models.pagination_metadata import PaginationMetadata as PaginationMetadata
 

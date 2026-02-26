@@ -7,18 +7,18 @@ from importlib import import_module
 
 if typing.TYPE_CHECKING:
     from .error import Error
-    from .generated1 import Generated1
-    from .generated2 import Generated2
-    from .generated4 import Generated4
-    from .generated5 import Generated5
     from .pagination_metadata import PaginationMetadata
+    from .test2get_response import Test2GetResponse
+    from .test2post_response import Test2PostResponse
+    from .test_get_response import TestGetResponse
+    from .test_post_response import TestPostResponse
 _dynamic_imports: typing.Dict[str, str] = {
     "Error": ".error",
-    "Generated1": ".generated1",
-    "Generated2": ".generated2",
-    "Generated4": ".generated4",
-    "Generated5": ".generated5",
     "PaginationMetadata": ".pagination_metadata",
+    "Test2GetResponse": ".test2get_response",
+    "Test2PostResponse": ".test2post_response",
+    "TestGetResponse": ".test_get_response",
+    "TestPostResponse": ".test_post_response",
 }
 
 
@@ -43,4 +43,11 @@ def __dir__():
     return sorted(lazy_attrs)
 
 
-__all__ = ["Error", "Generated1", "Generated2", "Generated4", "Generated5", "PaginationMetadata"]
+__all__ = [
+    "Error",
+    "PaginationMetadata",
+    "Test2GetResponse",
+    "Test2PostResponse",
+    "TestGetResponse",
+    "TestPostResponse",
+]
