@@ -85,7 +85,7 @@ def log_request_response(response):
     return response
   
 test_columns={"id":int,"field1":str,"field2":str}
-test2_columns={"id":int,"test_id":str,"field2":str,"field3":str}
+test2_columns={"id":int,"test_id":str,"created": str, "field2":str,"field3":str}
 
 @bp.route('/test/<field1>', methods=['POST'])
 @http_response(200)

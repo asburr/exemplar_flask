@@ -15,18 +15,22 @@ class Test2GetResponse:
     """
     Attributes:
         test_id (str):
+        created (str):
         field2 (str):
         field3 (str):
         id (int | Unset):
     """
 
     test_id: str
+    created: str
     field2: str
     field3: str
     id: int | Unset = UNSET
 
     def to_dict(self) -> dict[str, Any]:
         test_id = self.test_id
+
+        created = self.created
 
         field2 = self.field2
 
@@ -39,6 +43,7 @@ class Test2GetResponse:
         field_dict.update(
             {
                 "test_id": test_id,
+                "created": created,
                 "field2": field2,
                 "field3": field3,
             }
@@ -53,6 +58,8 @@ class Test2GetResponse:
         d = dict(src_dict)
         test_id = d.pop("test_id")
 
+        created = d.pop("created")
+
         field2 = d.pop("field2")
 
         field3 = d.pop("field3")
@@ -61,6 +68,7 @@ class Test2GetResponse:
 
         test_2_get_response = cls(
             test_id=test_id,
+            created=created,
             field2=field2,
             field3=field3,
             id=id,

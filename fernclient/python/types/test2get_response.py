@@ -9,6 +9,7 @@ from ..core.pydantic_utilities import IS_PYDANTIC_V2, UniversalBaseModel
 class Test2GetResponse(UniversalBaseModel):
     id: typing.Optional[int] = None
     test_id: str
+    created: str
     field2: str
     field3: str
 
