@@ -18,10 +18,10 @@ from typing_extensions import Annotated
 from pydantic import Field
 from typing import Any, Dict
 from typing_extensions import Annotated
-from openapi_client.models.generated import Generated
-from openapi_client.models.generated2 import Generated2
-from openapi_client.models.generated3 import Generated3
-from openapi_client.models.generated5 import Generated5
+from openapi_client.models.test2_get_response import Test2GetResponse
+from openapi_client.models.test2_post_request_json import Test2PostRequestJson
+from openapi_client.models.test_get_response import TestGetResponse
+from openapi_client.models.test_post_request_json import TestPostRequestJson
 
 from openapi_client.api_client import ApiClient, RequestSerialized
 from openapi_client.api_response import ApiResponse
@@ -57,7 +57,7 @@ class DbApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Generated2:
+    ) -> TestGetResponse:
         """Get row from test.
 
 
@@ -94,7 +94,7 @@ class DbApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Generated2",
+            '200': "TestGetResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -123,7 +123,7 @@ class DbApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Generated2]:
+    ) -> ApiResponse[TestGetResponse]:
         """Get row from test.
 
 
@@ -160,7 +160,7 @@ class DbApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Generated2",
+            '200': "TestGetResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -226,7 +226,7 @@ class DbApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Generated2",
+            '200': "TestGetResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -302,7 +302,7 @@ class DbApi:
     def db_test_field1_post(
         self,
         field1: Annotated[str, Field(min_length=1, strict=True)],
-        generated: Generated,
+        test_post_request_json: TestPostRequestJson,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -321,8 +321,8 @@ class DbApi:
 
         :param field1: (required)
         :type field1: str
-        :param generated: (required)
-        :type generated: Generated
+        :param test_post_request_json: (required)
+        :type test_post_request_json: TestPostRequestJson
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -347,7 +347,7 @@ class DbApi:
 
         _param = self._db_test_field1_post_serialize(
             field1=field1,
-            generated=generated,
+            test_post_request_json=test_post_request_json,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -373,7 +373,7 @@ class DbApi:
     def db_test_field1_post_with_http_info(
         self,
         field1: Annotated[str, Field(min_length=1, strict=True)],
-        generated: Generated,
+        test_post_request_json: TestPostRequestJson,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -392,8 +392,8 @@ class DbApi:
 
         :param field1: (required)
         :type field1: str
-        :param generated: (required)
-        :type generated: Generated
+        :param test_post_request_json: (required)
+        :type test_post_request_json: TestPostRequestJson
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -418,7 +418,7 @@ class DbApi:
 
         _param = self._db_test_field1_post_serialize(
             field1=field1,
-            generated=generated,
+            test_post_request_json=test_post_request_json,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -444,7 +444,7 @@ class DbApi:
     def db_test_field1_post_without_preload_content(
         self,
         field1: Annotated[str, Field(min_length=1, strict=True)],
-        generated: Generated,
+        test_post_request_json: TestPostRequestJson,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -463,8 +463,8 @@ class DbApi:
 
         :param field1: (required)
         :type field1: str
-        :param generated: (required)
-        :type generated: Generated
+        :param test_post_request_json: (required)
+        :type test_post_request_json: TestPostRequestJson
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -489,7 +489,7 @@ class DbApi:
 
         _param = self._db_test_field1_post_serialize(
             field1=field1,
-            generated=generated,
+            test_post_request_json=test_post_request_json,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -510,7 +510,7 @@ class DbApi:
     def _db_test_field1_post_serialize(
         self,
         field1,
-        generated,
+        test_post_request_json,
         _request_auth,
         _content_type,
         _headers,
@@ -538,8 +538,8 @@ class DbApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if generated is not None:
-            _body_params = generated
+        if test_post_request_json is not None:
+            _body_params = test_post_request_json
 
 
         # set the HTTP header `Accept`
@@ -603,7 +603,7 @@ class DbApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Generated5:
+    ) -> Test2GetResponse:
         """Get row from test2.
 
 
@@ -643,7 +643,7 @@ class DbApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Generated5",
+            '200': "Test2GetResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -673,7 +673,7 @@ class DbApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[Generated5]:
+    ) -> ApiResponse[Test2GetResponse]:
         """Get row from test2.
 
 
@@ -713,7 +713,7 @@ class DbApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Generated5",
+            '200': "Test2GetResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -783,7 +783,7 @@ class DbApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Generated5",
+            '200': "Test2GetResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -863,7 +863,7 @@ class DbApi:
         self,
         testid: Annotated[str, Field(min_length=1, strict=True)],
         field2: Annotated[str, Field(min_length=1, strict=True)],
-        generated3: Generated3,
+        test2_post_request_json: Test2PostRequestJson,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -884,8 +884,8 @@ class DbApi:
         :type testid: str
         :param field2: (required)
         :type field2: str
-        :param generated3: (required)
-        :type generated3: Generated3
+        :param test2_post_request_json: (required)
+        :type test2_post_request_json: Test2PostRequestJson
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -911,7 +911,7 @@ class DbApi:
         _param = self._db_test_testid_test2_field2_post_serialize(
             testid=testid,
             field2=field2,
-            generated3=generated3,
+            test2_post_request_json=test2_post_request_json,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -938,7 +938,7 @@ class DbApi:
         self,
         testid: Annotated[str, Field(min_length=1, strict=True)],
         field2: Annotated[str, Field(min_length=1, strict=True)],
-        generated3: Generated3,
+        test2_post_request_json: Test2PostRequestJson,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -959,8 +959,8 @@ class DbApi:
         :type testid: str
         :param field2: (required)
         :type field2: str
-        :param generated3: (required)
-        :type generated3: Generated3
+        :param test2_post_request_json: (required)
+        :type test2_post_request_json: Test2PostRequestJson
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -986,7 +986,7 @@ class DbApi:
         _param = self._db_test_testid_test2_field2_post_serialize(
             testid=testid,
             field2=field2,
-            generated3=generated3,
+            test2_post_request_json=test2_post_request_json,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1013,7 +1013,7 @@ class DbApi:
         self,
         testid: Annotated[str, Field(min_length=1, strict=True)],
         field2: Annotated[str, Field(min_length=1, strict=True)],
-        generated3: Generated3,
+        test2_post_request_json: Test2PostRequestJson,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1034,8 +1034,8 @@ class DbApi:
         :type testid: str
         :param field2: (required)
         :type field2: str
-        :param generated3: (required)
-        :type generated3: Generated3
+        :param test2_post_request_json: (required)
+        :type test2_post_request_json: Test2PostRequestJson
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1061,7 +1061,7 @@ class DbApi:
         _param = self._db_test_testid_test2_field2_post_serialize(
             testid=testid,
             field2=field2,
-            generated3=generated3,
+            test2_post_request_json=test2_post_request_json,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1083,7 +1083,7 @@ class DbApi:
         self,
         testid,
         field2,
-        generated3,
+        test2_post_request_json,
         _request_auth,
         _content_type,
         _headers,
@@ -1113,8 +1113,8 @@ class DbApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if generated3 is not None:
-            _body_params = generated3
+        if test2_post_request_json is not None:
+            _body_params = test2_post_request_json
 
 
         # set the HTTP header `Accept`

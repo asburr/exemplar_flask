@@ -9,3 +9,5 @@ docker run --rm -v "${PWD}:/local" \
     -g python \
     -o /local/$ROOT \
     --additional-properties=library=urllib3,python_version=3.10
+mv openapi_client openapi_client_root
+mv openapi_client/openapi_client openapi_client

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **db_test_field1_get**
-> Generated2 db_test_field1_get(field1)
+> TestGetResponse db_test_field1_get(field1)
 
 Get row from test.
 
@@ -20,7 +20,7 @@ Get row from test.
 
 ```python
 import openapi_client
-from openapi_client.models.generated2 import Generated2
+from openapi_client.models.test_get_response import TestGetResponse
 from openapi_client.rest import ApiException
 from pprint import pprint
 
@@ -57,7 +57,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Generated2**](Generated2.md)
+[**TestGetResponse**](TestGetResponse.md)
 
 ### Authorization
 
@@ -78,7 +78,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **db_test_field1_post**
-> object db_test_field1_post(field1, generated)
+> object db_test_field1_post(field1, test_post_request_json)
 
 Add row into test.
 
@@ -87,7 +87,7 @@ Add row into test.
 
 ```python
 import openapi_client
-from openapi_client.models.generated import Generated
+from openapi_client.models.test_post_request_json import TestPostRequestJson
 from openapi_client.rest import ApiException
 from pprint import pprint
 
@@ -103,11 +103,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = openapi_client.DbApi(api_client)
     field1 = 'field1_example' # str | 
-    generated = openapi_client.Generated() # Generated | 
+    test_post_request_json = openapi_client.TestPostRequestJson() # TestPostRequestJson | 
 
     try:
         # Add row into test.
-        api_response = api_instance.db_test_field1_post(field1, generated)
+        api_response = api_instance.db_test_field1_post(field1, test_post_request_json)
         print("The response of DbApi->db_test_field1_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -122,7 +122,7 @@ with openapi_client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **field1** | **str**|  | 
- **generated** | [**Generated**](Generated.md)|  | 
+ **test_post_request_json** | [**TestPostRequestJson**](TestPostRequestJson.md)|  | 
 
 ### Return type
 
@@ -148,7 +148,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **db_test_testid_test2_field2_get**
-> Generated5 db_test_testid_test2_field2_get(testid, field2)
+> Test2GetResponse db_test_testid_test2_field2_get(testid, field2)
 
 Get row from test2.
 
@@ -157,7 +157,7 @@ Get row from test2.
 
 ```python
 import openapi_client
-from openapi_client.models.generated5 import Generated5
+from openapi_client.models.test2_get_response import Test2GetResponse
 from openapi_client.rest import ApiException
 from pprint import pprint
 
@@ -196,7 +196,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Generated5**](Generated5.md)
+[**Test2GetResponse**](Test2GetResponse.md)
 
 ### Authorization
 
@@ -217,7 +217,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **db_test_testid_test2_field2_post**
-> object db_test_testid_test2_field2_post(testid, field2, generated3)
+> object db_test_testid_test2_field2_post(testid, field2, test2_post_request_json)
 
 Add row to test2 with foreign key to test.
 
@@ -226,7 +226,7 @@ Add row to test2 with foreign key to test.
 
 ```python
 import openapi_client
-from openapi_client.models.generated3 import Generated3
+from openapi_client.models.test2_post_request_json import Test2PostRequestJson
 from openapi_client.rest import ApiException
 from pprint import pprint
 
@@ -243,11 +243,11 @@ with openapi_client.ApiClient(configuration) as api_client:
     api_instance = openapi_client.DbApi(api_client)
     testid = 'testid_example' # str | 
     field2 = 'field2_example' # str | 
-    generated3 = openapi_client.Generated3() # Generated3 | 
+    test2_post_request_json = openapi_client.Test2PostRequestJson() # Test2PostRequestJson | 
 
     try:
         # Add row to test2 with foreign key to test.
-        api_response = api_instance.db_test_testid_test2_field2_post(testid, field2, generated3)
+        api_response = api_instance.db_test_testid_test2_field2_post(testid, field2, test2_post_request_json)
         print("The response of DbApi->db_test_testid_test2_field2_post:\n")
         pprint(api_response)
     except Exception as e:
@@ -263,7 +263,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **testid** | **str**|  | 
  **field2** | **str**|  | 
- **generated3** | [**Generated3**](Generated3.md)|  | 
+ **test2_post_request_json** | [**Test2PostRequestJson**](Test2PostRequestJson.md)|  | 
 
 ### Return type
 

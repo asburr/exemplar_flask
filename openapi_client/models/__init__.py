@@ -14,9 +14,9 @@
 
 # import models into model package
 from openapi_client.models.error import Error
-from openapi_client.models.generated import Generated
-from openapi_client.models.generated2 import Generated2
-from openapi_client.models.generated3 import Generated3
-from openapi_client.models.generated5 import Generated5
 from openapi_client.models.pagination_metadata import PaginationMetadata
+from openapi_client.models.test2_get_response import Test2GetResponse
+from openapi_client.models.test2_post_request_json import Test2PostRequestJson
+from openapi_client.models.test_get_response import TestGetResponse
+from openapi_client.models.test_post_request_json import TestPostRequestJson
 

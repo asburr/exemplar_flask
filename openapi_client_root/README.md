@@ -94,11 +94,11 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Error](docs/Error.md)
- - [Generated](docs/Generated.md)
- - [Generated2](docs/Generated2.md)
- - [Generated3](docs/Generated3.md)
- - [Generated5](docs/Generated5.md)
  - [PaginationMetadata](docs/PaginationMetadata.md)
+ - [Test2GetResponse](docs/Test2GetResponse.md)
+ - [Test2PostRequestJson](docs/Test2PostRequestJson.md)
+ - [TestGetResponse](docs/TestGetResponse.md)
+ - [TestPostRequestJson](docs/TestPostRequestJson.md)
 
 
 <a id="documentation-for-authorization"></a>
